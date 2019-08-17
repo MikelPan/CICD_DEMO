@@ -1,0 +1,11 @@
+language: bash
+dist: xenial
+services:
+  - docker
+before_scripts:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+script:
+  - echo "test code"
+after_success:
+  - docker build -t dockerplyx/apline:test .
+  - docker push dockerplyx/apline:test
